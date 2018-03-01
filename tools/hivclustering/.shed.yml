@@ -1,0 +1,8 @@
+name: hivclustering
+owner: veg
+description: A Python 3 library that makes inferences on HIV-1 transmission networks
+long_description: |
+  Long description goes here.
+remote_repository_url: https://github.com/rdvelazquez/tools-iuc/tree/hivclustering/tools/hivclustering
+homepage_url: https://github.com/veg/hivclustering
+type: unrestricted
