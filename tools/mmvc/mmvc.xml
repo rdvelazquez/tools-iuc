@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<tool id="mmvc" version="1.0.2" name="mmvc">
+<tool id="Test_mmvc" version="1.0.2" name="mmvc">
   <description>Multinomial mixture variant caller</description>
   <requirements>
     <requirement type="package" version="1.0.2">mmvc</requirement>
@@ -9,18 +9,20 @@
   </stdio>
   <version_command/>
   <command><![CDATA[
-		mmvc -j '$json_report' -f '$filter_msa'
-		#if str($options.advanced) == 'advanced':
-				-g $options.grid_density -c $options.chain_length -b $options.burnin_fraction -t $options.target_rate -p $options.posterior_threshold
-		#end if
-		'$input_fasta'
+                mmvc -j '$json_report' -f '$filter_msa'
+                #if str($options.advanced) == 'advanced':
+                                -g $options.grid_density -c $options.chain_length -b $options.burnin_fraction -t $options.target_rate -p $options.posterior_threshold
+                #end if 
+                '$input_fasta' &&
+                $__tool_directory__/extract_mmvc_consensus '$json_report' '$input_fasta.display_name' '$consensus_fasta'
     ]]></command>
   <inputs>
     <param name="input_fasta" label="Input FASTA" type="data" format="fasta"/>
     <conditional name="options">
       <param label="Additional options" name="advanced" type="select">
         <option value="defaults">Use defaults</option>
-        <option value="advanced">Specify additional parameters</option>
+        <option value="advanced">Specify additional
+        parameters</option>
       </param>
       <when value="defaults"/>
       <when value="advanced">
@@ -33,8 +35,9 @@
     </conditional>
   </inputs>
   <outputs>
-    <data format="mmvc" name="json_report"/>
+    <data format="json" name="json_report"/>
     <data format="fasta" name="filter_msa"/>
+    <data format="fasta" name="consensus_fasta"/>
   </outputs>
   <tests>
     <test>
@@ -50,20 +53,14 @@
     </test>
   </tests>
   <help><![CDATA[
-
 MMVC
 ----
 Multinomial mixture variant caller
-
     ]]></help>
   <citations>
-    <citation type="bibtex">
-            @UNPUBLISHED{spond,
-                author = "Sergei Kosakovsky Pond",
-                title = "HyPhy: Hypothesis Testing using Phylogenies",
-                year = "2000",
-                note = "http://hyphy.org/",
-                url = "http://hyphy.org/"}
-        </citation>
+    <citation type="bibtex">@UNPUBLISHED{spond, author = "Sergei
+    Kosakovsky Pond", title = "HyPhy: Hypothesis Testing using
+    Phylogenies", year = "2000", note = "http://hyphy.org/", url =
+    "http://hyphy.org/"}</citation>
   </citations>
 </tool>
