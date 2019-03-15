@@ -1,5 +1,5 @@
 name: mmvc
-owner: rdvelazquez
+owner: iuc
 description: Multinomial mixture variant caller
 long_description: |
   Call variants using a multinomial model sampled by MCMC
