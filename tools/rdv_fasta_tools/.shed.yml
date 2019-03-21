@@ -1,0 +1,4 @@
+name: rdv_fasta_tools
+owner: rdvelazquez
+description: fasta tools to fill in a few missing pieces in workflows
+type: unrestricted

@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+
+import sys
+
+# first argument is script name
+# second should be fasta path
+# third argument should be the text to prepend to the seq ids
+# fourth argument should be the path to save the fasta at
+originalFastaPath = sys.argv[1]
+textToPrepend = sys.argv[2]
+newFastaPath = sys.argv[3]
+
+newFastaString = ""
+
+with open(originalFastaPath) as fp:
+    line = fp.readline()
+    cnt = 1
+    while line:
+        if line.startswith(">"):
+            id = ">" + textToPrepend + "_" + line[1:]
+        else:
+            sequence = line
+            newFastaString += id + sequence
+        line = fp.readline()
+        cnt += 1
+
+f = open(newFastaPath, "w")
+f.write(newFastaString)
